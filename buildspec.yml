@@ -12,7 +12,7 @@ phases:
       - echo Installation completed on `date`
 artifacts:
   files:
-    - /server/**/*
+    - server/**/*
     - server/package.json
     - server/package-lock.json
     - server/node_modules/**/*
