@@ -27,6 +27,7 @@ function App() {
   }, []);
 
   console.log("notes->", notes);
+
   return (
     <div className="h-screen w-screen ">
       <div className="flex flex-col justify-between h-full  ">

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import API from "../network/api";
 
 const NewNote = () => {
@@ -23,11 +24,13 @@ const NewNote = () => {
       .then((res) => {
         console.log(res);
         if (res.status === 201) {
+          toast.success("Notes addedd succesefully");
           console.log("notes added succesefully");
         }
       })
       .catch((err) => {
         console.log(err);
+        toast.error("An error occured, try again");
       })
       .finally(() => {
         window.location.reload();

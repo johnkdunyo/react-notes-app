@@ -5,6 +5,7 @@ import { CiEdit } from "react-icons/ci";
 import { INote } from "../types";
 import { formatDate } from "../utils/utils";
 import API from "../network/api";
+import { toast } from "react-toastify";
 
 const Note = ({ id, title, body, createdAt, updatedAt }: INote) => {
   const [openOptions, setOpenOptions] = useState<boolean>(false);
@@ -36,11 +37,21 @@ const Note = ({ id, title, body, createdAt, updatedAt }: INote) => {
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
+          toast.success("Notes updated succesefully");
           console.log("udpated succesefully");
         }
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err.response.data.error);
+        if (
+          String(err.response.data.error).includes("UNIQUE constraint failed:")
+        ) {
+          toast.error("Title exists already, please change it");
+        }
+        setIsEditting(true);
+        setNoteBody(body);
+        setNoteTitle(title);
+        // if(err.response.data)
       });
     // .finally(() => {
     //   window.location.reload();
