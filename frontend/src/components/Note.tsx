@@ -3,8 +3,9 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { INote } from "../types";
+import { formatDate } from "../utils/utils";
 
-const Note = ({ id, title, body, createdAt, updatesAt }: INote) => {
+const Note = ({ id, title, body, createdAt, updatedAt }: INote) => {
   const [openOptions, setOpenOptions] = useState<boolean>(false);
   const [isEditting, setIsEditting] = useState<boolean>(false);
 
@@ -117,11 +118,11 @@ const Note = ({ id, title, body, createdAt, updatesAt }: INote) => {
         <div className="flex justify-between text-[12px] mt-2 border-t border-gray-900">
           <div className="flex flex-col">
             <p className="text-gray-600">created on</p>
-            <p>Tue 25th Dec</p>
+            <p>{formatDate(createdAt)}</p>
           </div>
           <div className="flex flex-col">
             <p className="text-gray-600">updated on</p>
-            <p>Tue 25th Dec</p>
+            <p>{formatDate(updatedAt)}</p>
           </div>
         </div>
       )}
