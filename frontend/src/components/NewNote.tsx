@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import API from "../network/api";
 
 const NewNote = () => {
   const [isAdding, setIsAdding] = useState<boolean>(false);
@@ -18,6 +19,19 @@ const NewNote = () => {
     setIsAdding(false);
     // api call to save
     console.log(title, body);
+    API.post("/note", { title, body })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 201) {
+          console.log("notes added succesefully");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        window.location.reload();
+      });
   };
   return (
     <div className="text-black bg-white border-2 border-gray-300 px-4  pb-2 rounded-lg ">

@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { INote } from "../types";
 import { formatDate } from "../utils/utils";
+import API from "../network/api";
 
 const Note = ({ id, title, body, createdAt, updatedAt }: INote) => {
   const [openOptions, setOpenOptions] = useState<boolean>(false);
@@ -31,10 +32,35 @@ const Note = ({ id, title, body, createdAt, updatedAt }: INote) => {
     // close editting
     setIsEditting(false);
     // api call to save
+    API.put(`/note/${id}`, { title: noteTitle, body: noteBody })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          console.log("udpated succesefully");
+        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+    // .finally(() => {
+    //   window.location.reload();
+    // });
   };
 
   const deleteNoteHandler = () => {
     // delete note
+    API.delete(`/note/${id}`)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          console.log("note delleted succesefully");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setOpenOptions(false);
+    window.location.reload();
   };
 
   return (
