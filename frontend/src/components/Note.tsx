@@ -36,7 +36,7 @@ const Note = ({ id, title, body, createdAt, updatedAt }: INote) => {
     API.put(`/note/${id}`, { title: noteTitle, body: noteBody })
       .then((res) => {
         console.log(res);
-        if (res.status === 200) {
+        if (res.status === 201) {
           toast.success("Notes updated succesefully");
           console.log("udpated succesefully");
         }
@@ -65,13 +65,19 @@ const Note = ({ id, title, body, createdAt, updatedAt }: INote) => {
         console.log(res);
         if (res.status === 200) {
           console.log("note delleted succesefully");
+          toast.success("Notes deleted succesefully");
+          setOpenOptions(false);
+          setTimeout(() => {
+            window.location.reload();
+          }, 2500);
         }
       })
       .catch((error) => {
         console.log(error);
+        toast.error("An error occured");
       });
-    setOpenOptions(false);
-    window.location.reload();
+
+    // window.location.reload();
   };
 
   return (

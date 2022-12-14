@@ -16,8 +16,6 @@ const NewNote = () => {
   const saveNoteHandler = (e: React.FormEvent<HTMLFormElement>) => {
     // prevent page from reloading
     e.preventDefault();
-    // close editting
-    setIsAdding(false);
     // api call to save
     console.log(title, body);
     API.post("/note", { title, body })
@@ -26,15 +24,19 @@ const NewNote = () => {
         if (res.status === 201) {
           toast.success("Notes addedd succesefully");
           console.log("notes added succesefully");
+          setIsAdding(false);
+          setTimeout(() => {
+            window.location.reload();
+          }, 2500);
         }
       })
       .catch((err) => {
         console.log(err);
         toast.error("An error occured, try again");
-      })
-      .finally(() => {
-        window.location.reload();
       });
+    //   .finally(() => {
+    //     window.location.reload();
+    //   });
   };
   return (
     <div className="text-black bg-white border-2 border-gray-300 px-4  pb-2 rounded-lg ">

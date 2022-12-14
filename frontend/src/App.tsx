@@ -14,7 +14,7 @@ function App() {
         console.log(res);
         if (res.status === 200) {
           console.log(res.data.notes);
-          setNotes(res.data.notes);
+          setNotes(res.data.notes.reverse());
         }
       })
       .catch((error) => {
