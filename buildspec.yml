@@ -12,6 +12,9 @@ phases:
       - echo Installation completed on `date`
 artifacts:
   files:
-    - package.json
-    - package-lock.json
-    - node_modules/**/*
+    - server/package.json
+    - server/package-lock.json
+    - server/node_modules/**/*
+    - server/index.js
+    - server/db.js
+    - server/db.sqlite
