@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 });
 
 // api endpoints
-app.get("/note", (req, res, next) => {
+app.get("/api/note", (req, res, next) => {
   console.log("getting all notes");
   db.all("SELECT * FROM notes", [], (err, rows) => {
     if (err) {
@@ -28,7 +28,7 @@ app.get("/note", (req, res, next) => {
   });
 });
 
-app.get("/note/:id", (req, res, next) => {
+app.get("/api/note/:id", (req, res, next) => {
   console.log("getting single note");
   db.all("SELECT * FROM notes WHERE id= ?", [req.params.id], (err, row) => {
     if (err) {
@@ -41,7 +41,7 @@ app.get("/note/:id", (req, res, next) => {
   });
 });
 
-app.put("/note/:id", (req, res, next) => {
+app.put("/api/note/:id", (req, res, next) => {
   const date = new Date();
 
   db.run(
@@ -57,7 +57,7 @@ app.put("/note/:id", (req, res, next) => {
   );
 });
 
-app.post("/note", (req, res, next) => {
+app.post("/api/note", (req, res, next) => {
   const date = new Date();
   db.run(
     "INSERT INTO notes (title, body, createdAt, updatedAt) VALUES (?,?,?,?)",
@@ -71,7 +71,7 @@ app.post("/note", (req, res, next) => {
   );
 });
 
-app.delete("/note/:id", (req, res, next) => {
+app.delete("/api/note/:id", (req, res, next) => {
   db.run("DELETE FROM notes WHERE id =? ", [req.params.id], (err, row) => {
     if (err) {
       return res.status(400).json({ error: err.message });
