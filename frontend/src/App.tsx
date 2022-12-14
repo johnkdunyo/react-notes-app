@@ -1,5 +1,4 @@
 import React from "react";
-import NewNote from "./components/NewNote";
 import Note from "./components/Note";
 
 function App() {
@@ -11,7 +10,6 @@ function App() {
         </div>
         <main className="container mx-auto h-full p-5 ">
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-            <NewNote />
             <Note
               id="1"
               title="this is just a title"
