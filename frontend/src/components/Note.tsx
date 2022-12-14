@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import { SlOptionsVertical } from "react-icons/sl";
 import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
+import { INote } from "../types";
 
-const Note = () => {
+const Note = ({ id, title, body, createdAt, updatesAt }: INote) => {
   const [openOptions, setOpenOptions] = useState<boolean>(false);
   const [isEditting, setIsEditting] = useState<boolean>(false);
 
-  const [title, setTitle] = useState<string>(
-    "This is a title, it is a nice ttile"
-  );
-  const [body, setBody] = useState<string>(
-    "this is the body.. In general, the position of a sticky navbar is relative it will scroll down like other elements until it crosses a specified threshold, then ..."
-  );
+  const [noteTitle, setNoteTitle] = useState<string>(title);
+  const [noteBody, setNoteBody] = useState<string>(body);
 
   const editNoteHandler = () => {
     setIsEditting(true);
@@ -56,21 +53,23 @@ const Note = () => {
             <input
               className="border-b border-black font-bold w-full p-2 placeholder:text-black"
               placeholder="This is the title This is the title This is the title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={noteTitle}
+              onChange={(e) => setNoteTitle(e.target.value)}
             />
             <textarea
               className="mt-3 w-full p-2 "
-              value={body}
+              value={noteBody}
               rows={5}
-              onChange={(e) => setBody(e.target.value)}
+              onChange={(e) => setNoteBody(e.target.value)}
             />
           </div>
         </form>
       ) : (
         <div className="">
-          <h1 className="border-b border-gray-300 font-bold pb-1">{title}</h1>
-          <p className="mt-3 ">{body}</p>
+          <h1 className="border-b border-gray-300 font-bold pb-1">
+            {noteTitle}
+          </h1>
+          <p className="mt-3 ">{noteBody}</p>
         </div>
       )}
 

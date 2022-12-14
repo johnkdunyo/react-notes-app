@@ -10,8 +10,20 @@ function App() {
         </div>
         <main className="container mx-auto h-full p-5 ">
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-            <Note />
-            <Note />
+            <Note
+              id="1"
+              title="this is just a title"
+              body="This is just body"
+              createdAt="Tue Dec 25th"
+              updatesAt="Tue Dec 26th"
+            />
+            <Note
+              id="2"
+              title="this is just another title"
+              body="This is just another body"
+              createdAt="Tue Jan 25th"
+              updatesAt="Tue Jan 26th"
+            />
           </div>
         </main>
       </div>
