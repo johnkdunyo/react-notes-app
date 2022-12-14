@@ -8,12 +8,32 @@ const Note = ({ id, title, body, createdAt, updatesAt }: INote) => {
   const [openOptions, setOpenOptions] = useState<boolean>(false);
   const [isEditting, setIsEditting] = useState<boolean>(false);
 
+  // set default to title and body
   const [noteTitle, setNoteTitle] = useState<string>(title);
   const [noteBody, setNoteBody] = useState<string>(body);
 
   const editNoteHandler = () => {
+    // set editting to true and close the options menu
     setIsEditting(true);
     setOpenOptions(false);
+  };
+
+  const cancelEdittingHandler = () => {
+    // close editting
+    setIsEditting(false);
+    // reset title and body to default
+    setNoteTitle(title);
+    setNoteBody(body);
+  };
+
+  const saveNoteHandler = () => {
+    // close editting
+    setIsEditting(false);
+    // api call to save
+  };
+
+  const deleteNoteHandler = () => {
+    // delete note
   };
 
   return (
@@ -42,28 +62,33 @@ const Note = ({ id, title, body, createdAt, updatesAt }: INote) => {
               <CiEdit color="green" /> <span className="ml-2">Edit</span>
             </button>
             <button className="w-full px-2 text-left border-b hover:bg-gray-200 flex items-center">
-              <MdDelete color="red" /> <span className="ml-2">Delete</span>
+              <MdDelete color="red" />{" "}
+              <span className="ml-2" onClick={deleteNoteHandler}>
+                Delete
+              </span>
             </button>
           </div>
         </div>
       </div>
       {isEditting ? (
-        <form>
+        <>
           <div className="pr-2 text-black">
             <input
               className="border-b border-black font-bold w-full p-2 placeholder:text-black"
               placeholder="This is the title This is the title This is the title"
               value={noteTitle}
               onChange={(e) => setNoteTitle(e.target.value)}
+              required
             />
             <textarea
               className="mt-3 w-full p-2 "
               value={noteBody}
               rows={5}
               onChange={(e) => setNoteBody(e.target.value)}
+              required
             />
           </div>
-        </form>
+        </>
       ) : (
         <div className="">
           <h1 className="border-b border-gray-300 font-bold pb-1">
@@ -77,11 +102,14 @@ const Note = ({ id, title, body, createdAt, updatesAt }: INote) => {
         <div className="flex justify-between text-[12px] py-2 border-t border-gray-900">
           <button
             className="border px-2 py-1.5 rounded-md bg-red-600 text-white"
-            onClick={() => setIsEditting(false)}
+            onClick={cancelEdittingHandler}
           >
             Cancel
           </button>
-          <button className="border px-3 py-1.5 rounded-md bg-green-600 text-white">
+          <button
+            className="border px-3 py-1.5 rounded-md bg-green-600 text-white"
+            onClick={saveNoteHandler}
+          >
             Save
           </button>
         </div>
