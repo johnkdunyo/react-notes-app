@@ -6,6 +6,7 @@ phases:
     runtime-versions:
       nodejs: latest
     commands:
+      - cd server
       - npm install
       - echo Installing source NPM dependencies...
       - echo Installation completed on `date`
